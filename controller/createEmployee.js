@@ -1,14 +1,15 @@
-const emp =require('../model/data');
-const empValidation = require('../helper/EmpValidation');
+// const emp =require('../model/data');
+import emp from '../model/data';
+//const empValidation = require('../helper/EmpValidation');
+import tripValidation from '../helper/EmpValidation';
 const createEmp = (req, res)=>{
-    const {error} = empValidation.validation(req.body);
-    if(error)
-    {
-        return res.status(400).json({
-            status:400,
-            error:error.details[0].message,
-        });
-    }
+    // const { error } = tripValidation.validation(req.body);
+    // if (error) {
+    //     return res.status(400).json({
+    //         status: 400,
+    //         error: error.details[0].message,
+    //     });
+    // }
     const newEmp = {
         emp_name :req.body.emp_name,
         national_id:req.body.national_id,
@@ -33,4 +34,5 @@ const createEmp = (req, res)=>{
         }
     })
 }
-module.exports = createEmp;
+// module.exports = createEmp;
+export default createEmp;
