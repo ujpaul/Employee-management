@@ -1,8 +1,7 @@
-// const app = require('./app');
-// const router = require('./routes/route');
-// app.use(router);
-import express from 'express';
-const app = express();
-app.listen(3000,()=>{
-    console.log("App is listening on port 3000...");
+const dotenv = require('dotenv')
+const app = require('./app');
+dotenv.config()
+const port = process.env.PORT || 3000;
+app.listen(port,()=>{
+    console.log(`this app is listening on port ${port}...`);
 })
