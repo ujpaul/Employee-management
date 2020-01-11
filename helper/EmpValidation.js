@@ -1,6 +1,7 @@
-const Joi = require('joi');
+// const Joi = require('joi');
+import Joi from 'joi';
 const TovalidEmp = {
-    EmpValidaton (empToBeValidated){
+    Employee(emp){
         const schema = {
             emp_name:Joi.string().required(),
             national_id:Joi.number().min(16).max(16).required(),
@@ -10,7 +11,8 @@ const TovalidEmp = {
             status:Joi.string().required(),
             position:Joi.string().required(),
         };
-        return Joi.validate(empToBeValidated,schema);
+        return Joi.validate(emp,schema);
     }
 }
-module.exports = TovalidEmp;
+// module.exports = TovalidEmp;
+export default TovalidEmp;

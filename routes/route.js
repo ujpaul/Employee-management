@@ -1,6 +1,11 @@
-const express = require('express');
-// const app = require('../app.js');
-const createEmployee = require('../controller/createEmployee');
+import express from 'express';
+import createEmployee from '../controller/createEmployee';
+import getView from '../controller/view';
+import managerSignup from '../controller/signup';
+import managerSignin from '../controller/signin';
+import auth from '../middleware/auth';
 const router = express.Router();
-router.post('/emoloyees',createEmployee);
-module.exports = router;
+router.post('/employees',createEmployee);
+router.post('/manager/signup',managerSignup);
+router.post('/manager/signin',managerSignin);
+export default router;
