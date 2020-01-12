@@ -19,5 +19,6 @@ const signin = (req, res)=>{
     }catch (err){
         return err;
     }
+    console.log(manager);
 }
 export default signin;
