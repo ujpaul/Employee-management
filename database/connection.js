@@ -11,7 +11,7 @@ pool.on('connect', () => {
   console.log('Connected on Database');
 });
 
-module.exports = {
+ class Database {
   query(text, param) {
     try {
       return pool.query(text, param);
@@ -19,4 +19,6 @@ module.exports = {
       return err;
     }
   }
-};
+ }
+
+ module.exports = Database;
