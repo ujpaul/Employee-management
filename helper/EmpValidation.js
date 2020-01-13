@@ -1,18 +1,19 @@
-// const Joi = require('joi');
 import Joi from 'joi';
-const TovalidEmp = {
-    Employee(emp){
-        const schema = {
-            emp_name:Joi.string().required(),
-            national_id:Joi.number().min(16).max(16).required(),
-            phone_number:Joi.number().max(11).min(11).required(),
-            email:Joi.string().trim().email().required(),
-            DOB:Joi.date().required(),
+
+const register = {
+validation(user){
+const userValidation = {
+            employeeName :Joi.string().required(),
+            nationalID:Joi.string().min(16).max(16).required(),
+            phoneNumber:Joi.string().min(11).max(11).required(),
+            email:Joi.string().email().required().trim(),
+            dateOfBirth:Joi.date().required(),
             status:Joi.string().required(),
             position:Joi.string().required(),
-        };
-        return Joi.validate(emp,schema);
-    }
+  };
+  
+  return Joi.validate(user,userValidation)
+},
 }
-// module.exports = TovalidEmp;
-export default TovalidEmp;
+
+export default register;
