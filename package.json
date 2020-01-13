@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node --require babel-core/register --require babel-polyfill index.js",
+    "dbactive": "node --require babel-core/register --require babel-polyfill ./server/database/active_db.js",
     "test": "node --require babel-core/register --require babel-polyfill test.js"
   },
   "repository": {
@@ -28,7 +29,9 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "joi": "^14.3.1",
-    "jsonwebtoken": "^8.5.1"
+    "jsonwebtoken": "^8.5.1",
+    "make-runnable": "^1.3.6",
+    "pg": "^7.17.1"
   },
   "devDependencies": {
     "babel-watch": "^7.0.0"
