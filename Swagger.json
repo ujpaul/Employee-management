@@ -105,13 +105,14 @@
           }
         }
       },
+      "/employees/{id}":{
       "put": {
         "description": "update employees",
         "summary": "localhost:5000/employees/{id}",
         "tags": [
           "Misc"
         ],
-        "operationId": "localhost:5000/employees/{id}",
+        "operationId": "Putlocalhost:5000/employees",
         "deprecated": false,
         "produces": [
           "application/json"
@@ -192,13 +193,14 @@
             "headers": {}
           }
         }
+      }
       },
       "delete": {
-        "summary": "localhost:5000/employees/{id}",
+        "summary": "localhost:5000/employees",
         "tags": [
           "Misc"
         ],
-        "operationId": "Deletelocalhost:5000/employees/{id}",
+        "operationId": "Deletelocalhost:5000/employees",
         "deprecated": false,
         "produces": [
           "application/json"
@@ -360,13 +362,13 @@
         }
       }
     },
-    "/employees/suspend": {
+    "/employees/suspend/{id}": {
       "put": {
-        "summary": "localhost:5000/employees/suspend/{id}",
+        "summary": "localhost:5000/employees/suspend",
         "tags": [
           "Misc"
         ],
-        "operationId": "localhost:5000/employees/suspend/{id}",
+        "operationId": "localhost:5000/employees/suspend",
         "deprecated": false,
         "produces": [
           "application/json"
@@ -388,13 +390,13 @@
         }
       }
     },
-    "/employees/activate/1": {
+    "/employees/activate/{id}": {
       "put": {
-        "summary": "localhost:5000/employees/activate/{id}",
+        "summary": "localhost:5000/employees/activate",
         "tags": [
           "Misc"
         ],
-        "operationId": "localhost:5000/employees/activate/{id}",
+        "operationId": "localhost:5000/employees/activate",
         "deprecated": false,
         "produces": [
           "application/json"
