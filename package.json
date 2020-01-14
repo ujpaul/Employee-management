@@ -4,9 +4,8 @@
   "description": "Awesomity challenge project",
   "main": "index.js",
   "scripts": {
-    "start": "node --require babel-core/register --require babel-polyfill index.js",
-    "dbactive": "node --require babel-core/register --require babel-polyfill ./server/database/active_db.js",
-    "test": "node --require babel-core/register --require babel-polyfill test.js"
+    "start": "npm run dbactive && node --require babel-core/register --require babel-polyfill index.js",
+    "dbactive": "node --require babel-core/register --require babel-polyfill ./database/dbTables/index.js"
   },
   "repository": {
     "type": "git",

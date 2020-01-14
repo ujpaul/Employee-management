@@ -1,6 +1,7 @@
-import employee from '../model/data';
+import Database from '../database/connection';
 import empvalidation from '../helper/EmpValidation';
-const update =(req, res)=>{
+const db = new Database;
+const update =async (req, res)=>{
     const {error} =empvalidation.validation(req.body);
         if(error)
         {
@@ -10,33 +11,53 @@ const update =(req, res)=>{
                 
             });
         }
-    const emp = employee.find((em) => em.id === parseInt(req.params.id));
-    if(!emp)
+        try{
+            const empEmail =req.body.email;
+    const {rowcount} = await db.query('SELECT * FROM employees WHERE email = $1',[empEmail]);
+    if(rowcount)
+    {
+        res.status(409).json({
+            status:409,
+            error:"This email has already used,please use another"
+        })
+    }
+    const id=req.params.id;
+    const {rows} = await db.query('SELECT id FROM employees');
+    const empId = rows.find(emp=>emp.id === parseInt(id,10));
+    if(!empId)
     {
         res.status(404).json({
             status:404,
-            error:"employee you are looking for not found"
-        })
-    }
-    emp.emp_name = req.body.emp_name;
-    emp.national_id = req.body.national_id;
-    emp.phone_number = req.body.phone_number;
-    emp.email = req.body.email;
-    emp.DOB = req.body.DOB;
-    emp.status = req.body.status;
-    emp.position = req.body.position;
-    res.status(201).json({
-        status:201,
-        message:"Employee Updated successfully",
-        data:{
-            emp_name:emp.emp_name,
-            national_id:emp.national_id,
-            phone_number:emp.phone_number,
-            email:emp.email,
-            DOB:emp.DOB,
-            status:emp.status,
-            position:emp.position
-        }
+            error:"Employee you are looking for not found"
     })
 }
+   if(empId){
+    const editEmp = [
+        req.body.employeeName,
+        req.body.nationalID,
+        req.body.phoneNumber,
+        req.body.email,
+        req.body.dateOfBirth,
+        req.body.status,
+        req.body.position,
+      ];
+ 
+    const updateQuery = 'UPDATE employees SET employeeName=$1,nationalID=$2,phoneNumber=$3,email=$4,dateOfBirth=$5,status=$6,position=$7 returning *';
+    const {rows} = await db.query(updateQuery,editEmp);
+    if(rows){
+        return res.status(200).json({
+            status:200,
+            message:"Employee Updated successfully",
+            Employee:rows[0],
+        });
+    }
+}
+  
+}
+        catch (err)
+        {
+            return err;
+        }
+    }
+    
 export default update;
