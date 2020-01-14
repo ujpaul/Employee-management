@@ -20,20 +20,20 @@ import activate from '../controller/activate';
 
 const router = express.Router();
 
-router.post('/employees',createEmployee);
+router.post('/employees',auth,createEmployee);
 
 router.post('/manager/signup',managerSignup);
 
 router.post('/manager/signin',managerSignin);
 
-router.put('/employees/:id',updateEmployee);
+router.put('/employees/:id',auth,updateEmployee);
 
-router.delete('/employees/:id',deleteEmp);
+router.delete('/employees/:id',auth,deleteEmp);
 
-router.put('/employees/suspend/:id',suspend);
+router.put('/employees/suspend/:id',auth,suspend);
 
-router.put('/employees/activate/:id',activate);
+router.put('/employees/activate/:id',auth,activate);
 
-router.post('/employees/search',search);
+router.post('/employees/search',auth,search);
 
 export default router;
