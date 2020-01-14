@@ -15,6 +15,8 @@ const createEmp = async (req, res)=>{
         }
         try{
             const existing_email = req.body.email;
+            const phoneNumber = req.body.phoneNumber;
+            const nationalID = req.body.nationalID;
             const { rowCount } = await db.query('SELECT email FROM managers WHERE email = $1', [existing_email]);
         
             if (rowCount) {
@@ -23,6 +25,7 @@ const createEmp = async (req, res)=>{
                 error: ' Your email had already used. use another to proceed ',
               });
             }
+           
         //const created_on = new date();
         const newEmp = [
             req.body.employeeName,
