@@ -1,19 +1,42 @@
-import empdata from '../model/data';
-
-const deleteEmp =(req ,res)=>{
-    const empId = empdata.find((em)=>em.id === parseInt(req.params.id));
+import Database from '../database/connection';
+const db = new Database;
+const deleteEmployee = async(req, res)=>{
+    try{
+        const id= req.params.id;
+        const {rows}= await db.query('SELECT id FROM employees');
+    const empId = rows.find((em) => em.id === parseInt(id,10));
     if(!empId)
     {
         res.status(404).json({
             status:404,
-            error:"Id you are looking for Not found"
-       })
+            error:"employee you wish to delete not Exist"
+        })
     }
-    const index = empdata.indexOf(empId);
-    empdata.splice(index,1);
-    return res.status(200).json({
-        status:200,
-        message:"Employee deleted successfully"
-    })
+    if(empId)
+    {
+        const del = 'DELETE from employees WHERE id=$1 returning *';
+        const {rows} = await db.query('DELETE from employees WHERE id=$1 returning*',[id] );
+        if(rows)
+        {
+            res.status(200).json({
+                status:200,
+                message:"employee deleted successfully",
+                Employee:rows[0],
+            });
+        }
+    }
+   
+    
+    }
+    catch(err)
+    {
+        res.status(500).json({
+            status:500,
+            Error:"Internal server error occured"
+        })
+        console.log(err);
+    }
+    
+   
 }
-export default deleteEmp;
+export default deleteEmployee;
